@@ -1,0 +1,25 @@
+{
+  "name": "firstServerExpress",
+  "version": "1.0.0",
+  "description": "This is a simple RESTful API made with express.\r This demo will use CRUD operations to take notes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emmanuel-Bolanos/firstServerExpress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emmanuel-Bolanos/firstServerExpress/issues"
+  },
+  "homepage": "https://github.com/Emmanuel-Bolanos/firstServerExpress#readme",
+  "dependencies": {
+    "aws-sdk": "^2.875.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0"
+  }
+}
