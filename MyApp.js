@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 // Allows us to parse json objs in the body of the request
 app.use(express.json());
+const mysql = require('mysql');
+const { func } = require('joi');
 
 // validation function
 function validateNote(Note) {
@@ -16,6 +18,18 @@ function validateNote(Note) {
   return schema.validate(Note);
 }
 
+// DB connection
+app.use(function(req, res, next) {
+  res.locals.connection = mysql.createConnection({
+    host: ' ',
+    user: ' ',
+    password: ' ',
+    database: ' '
+  });
+  res.locals.connection.connect();
+  next();
+})
+
 // our "db"
 // TODO mod this to work with RDS
 const Notes = [
@@ -25,9 +39,17 @@ const Notes = [
   {id: 4, title: "a crazy note"}
 ];
 
-// Handle GET requests
+// // Handle GET requests
+// app.get('/api/Notes', (req, res) => {
+//   res.send(Notes);
+// });
+
+// Handle GET requests for sql!
 app.get('/api/Notes', (req, res) => {
-  res.send(Notes);
+  res.locals.connection.query('SELECT * from notes', function (error, results, fields) {
+		if (error) throw error;
+		res.send(results);
+	});
 });
 
 app.get('/api/Notes/:id', (req, res) => {
