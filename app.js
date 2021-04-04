@@ -21,7 +21,7 @@ app.listen(port, () => console.log(`server listening on port ${port}...`));
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'GbdtPIvy0v85Y7M4',
+  password: '',
   database: 'notesbox'
 });
 
