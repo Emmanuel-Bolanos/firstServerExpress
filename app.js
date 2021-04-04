@@ -11,44 +11,57 @@ const mysql = require('mysql');
 // Set environment variable. Else use the port 3000
 const port = process.env.PORT || 3000;
 // Server listening for client request
-app.listen(port, () => console.log(`listening on port ${port}...`));
+app.listen(port, () => console.log(`server listening on port ${port}...`));
 
 // TODO query parameters (example: /?sortBy=name) are optional
 // TODO set a validation method
 
 // mysql connection
-app.use(function(req, res, next) {
-  res.locals.connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'GbdtPIvy0v85Y7M4',
-    database: 'notesbox'
-  });
-  res.locals.connection.connect((err) => {
-    if(err) console.log('Connection to mysql failed!');
-  });
-  next();
-})
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'GbdtPIvy0v85Y7M4',
+  database: 'notesbox'
+});
 
+connection.connect(err => { 
+  if (err) throw err;
+  console.log("database server connected");
+});
+
+/**/
+// app.use(function(req, res, next) {
+//   res.locals.connection ;
+//   res.locals.connection.connect((err) => {
+//     if(err) console.log('Connection to mysql failed!');
+//   });
+//   next();
+// })
+
+// Routes
 // Handle GET requests
 app.get('/', (req, res) => {
-  res.locals.connection.query('SELECT * FROM notes', (error, results, fields) => {
-		if (error) throw error;
+  const sql = 'SELECT * FROM notes';
+  connection.query(sql, (err, results) => {
+		if (err) throw err;
 		res.send(results);
 	});
 });
 
 app.get('/:id', (req, res) => {
-  res.locals.connection.query('SELECT * FROM notes WHERE id = ?', [req.params.id],  (error, results, fields) => {
-    if (error) throw error;
+  const sql = 'SELECT * FROM notes WHERE id = ?';
+  connection.query(sql, [req.params.id],  (err, results) => {
+    if (err) throw err;
     res.send(results);
   });
 })
 
 // Handle POST requests
 app.post('/', (req, res) => {
-  res.locals.connection.query('INSERT INTO notes (title, content, priorityLevel, taskState, creationDate, deadline) VALUES (?, ?, ?, ?, ?, ?)', [req.body.title, req.body.content, req.body.priorityLevel, req.body.taskState, req.body.creationDate, req.body.deadline],  (error, results, fields) => {
-    if (error) throw error;
+  const sql = 'INSERT INTO notes (title, content, priorityLevel, taskState, creationDate, deadline) VALUES (?, ?, ?, ?, ?, ?)';
+  const sqlreq = [req.body.title, req.body.content, req.body.priorityLevel, req.body.taskState, req.body.creationDate, req.body.deadline];
+  connection.query(sql, sqlreq,  (err, results) => {
+    if (err) throw err;
     res.send(results);
   });
 });
