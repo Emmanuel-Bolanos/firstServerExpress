@@ -3,6 +3,9 @@ const app = express();
 // Allows us to parse json objs in the body of the request
 app.use(express.json());
 
+// add credentials
+const credentials = require('./credentials/keys.json');
+
 const mysql = require('mysql');
 
 // Joi is a class that will help us to validate information
@@ -18,12 +21,7 @@ app.listen(port, () => console.log(`server listening on port ${port}...`));
 // TODO update only the parameters given by the client
 
 // mysql connection
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'notesbox'
-});
+const connection = mysql.createConnection(credentials);
 
 connection.connect(err => { 
   if (err) throw err;
