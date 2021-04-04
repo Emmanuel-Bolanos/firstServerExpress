@@ -13,8 +13,9 @@ const port = process.env.PORT || 3000;
 // Server listening for client request
 app.listen(port, () => console.log(`server listening on port ${port}...`));
 
-// TODO query parameters (example: /?sortBy=name) are optional
-// TODO set a validation method
+// TODO query parameters (example: /?sortBy=name)
+// TODO set a validation method for requested ids
+// TODO update only the parameters given by the client
 
 // mysql connection
 const connection = mysql.createConnection({
@@ -28,15 +29,6 @@ connection.connect(err => {
   if (err) throw err;
   console.log("database server connected");
 });
-
-/**/
-// app.use(function(req, res, next) {
-//   res.locals.connection ;
-//   res.locals.connection.connect((err) => {
-//     if(err) console.log('Connection to mysql failed!');
-//   });
-//   next();
-// })
 
 // Routes
 // Handle GET requests
@@ -66,28 +58,22 @@ app.post('/', (req, res) => {
   });
 });
 
-// // Handle PUT requests
-// app.put('/api/Notes/:id', (req, res) => {
-//   // locate element, return 404 if not found
-//   const Note = Notes.find(element => element.id === parseInt(req.params.id));
-//   if (!Note) return res.status(404).send(`Note with id ${parseInt(req.params.id)} not found`);
-//   // validate
-//   const result = validateNote(req.body);
-//   if (result.error) return res.status(400).send(result.error.details[0].message);
-//   // update
-//   Note.title = req.body.title;
-//   // return update to client
-//   res.send(Note);
-// });
+// Handle PUT requests
+app.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const sqlreq = req.body;
+  const sql = `UPDATE notes SET title = '${sqlreq.title}' WHERE id = '${id}'`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
 
-// // Handle DELETE requests
-// app.delete('/api/Notes/:id', (req, res) => {
-//   // locate element, return 404 if not found
-//   const Note = Notes.find(element => element.id === parseInt(req.params.id));
-//   if (!Note) return res.status(404).send(`Note with id ${parseInt(req.params.id)} not found`);
-//   // delete
-//   const idx = Notes.indexOf(Note);
-//   Notes.splice(idx, 1);
-//   // return deleted element
-//   res.send(Note);
-// });
+// Handle DELETE requests
+app.delete('/:id', (req, res) => {
+  const sql = `DELETE FROM notes WHERE id = '${req.params.id}'`;
+  connection.query(sql, (err, results) => {
+    if (err) throw err;
+    res.send(results);
+  });
+});
