@@ -1,31 +1,20 @@
-// Joi is a class that will help us to validate information
-const Joi = require('joi');
 const express = require('express');
 const app = express();
 // Allows us to parse json objs in the body of the request
 app.use(express.json());
+
 const mysql = require('mysql');
 
-// Set environment var
+// Joi is a class that will help us to validate information
+// const Joi = require('joi');
+
+// Set environment variable. Else use the port 3000
 const port = process.env.PORT || 3000;
-// server listening for client request
+// Server listening for client request
 app.listen(port, () => console.log(`listening on port ${port}...`));
 
-// // TODO query parameters (example: /?sortBy=name) are optional
-// app.get('/api/Notes/:id', (req, res) => {
-//   res.send(req.query);
-// });
-
-// validation function
-function validateNote(Note) {
-  // set schema
-  const schema = Joi.object({
-    title: Joi.string().min(1).required(),
-    // content: Joi.string().min(1).max(255).required()
-  });
-  // validate the schema requirements
-  return schema.validate(Note);
-}
+// TODO query parameters (example: /?sortBy=name) are optional
+// TODO set a validation method
 
 // mysql connection
 app.use(function(req, res, next) {
