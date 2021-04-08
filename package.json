@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Emmanuel-Bolanos/firstServerExpress#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "joi": "^17.4.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "pm2": "^4.5.6"
   }
 }
