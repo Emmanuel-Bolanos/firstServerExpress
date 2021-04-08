@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 // add credentials
-const credentials = require('./credentials/keys.json');
+const credentials = require('../credentials/keys.json');
 
 const mysql = require('mysql');
 
