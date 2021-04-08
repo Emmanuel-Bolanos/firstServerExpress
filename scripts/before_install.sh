@@ -6,4 +6,5 @@ sudo apt update
 sudo apt install nginx git nodejs npm
 
 # clone git repo
-git clone https://github.com/Emmanuel-Bolanos/firstServerExpress /home/ubuntu/
+mkdir /home/ubuntu/firstServerExpress
+git clone https://github.com/Emmanuel-Bolanos/firstServerExpress /home/ubuntu/firstServerExpress
