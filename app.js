@@ -45,7 +45,7 @@ app.get('/:id', (req, res) => {
     res.send(results);
   });
 })
-// this is a smol test
+
 // Handle POST requests
 app.post('/', (req, res) => {
   const sql = 'INSERT INTO notes (title, content, priorityLevel, taskState, creationDate, deadline) VALUES (?, ?, ?, ?, ?, ?)';
