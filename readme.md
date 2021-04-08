@@ -6,4 +6,6 @@ The demo uses Express with an RDS instance with mysql to CRUD notes.
 
 The server is deployed with CodeDeploy and served with nginx acting as a reverse proxy.
 
-The SSL certificate was obtained thanks to [certbot](https://certbot.eff.org/)  !
+The SSL certificate was obtained thanks to [certbot](https://certbot.eff.org/)!
+
+[React Frontend](https://github.com/Emmanuel-Bolanos/notesExpressAPI).
