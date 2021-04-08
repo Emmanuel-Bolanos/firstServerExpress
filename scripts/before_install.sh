@@ -1,7 +1,6 @@
 #!/bin/bash
 
 sudo apt update
-sudo apt upgrade
 
 # Install necessary packages
 sudo apt install nginx git nodejs npm
