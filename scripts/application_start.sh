@@ -21,6 +21,7 @@ sleep 1
 
 # move git folder
 sudo mv /home/ubuntu/firstServerExpress /var/www/
+cd /var/www/firstServerExpress
 
 # start our node app in the background
 pm2 start app.js 
