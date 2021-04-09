@@ -3,10 +3,12 @@
 #give permission for everything in the express-app directory
 sudo chmod -R 777 /home/ubuntu/firstServerExpress
 
-# Remove previous folder and move new version
+# Remove previous folder
 sudo rm -rf /var/www/firstServerExpress
-sudo mv /home/ubuntu/firstServerExpress /var/www/firstServerExpress
-cd /var/www/firstServerExpress
+sudo mkdir /var/www/firstServerExpress
+
+# move to git folder
+cd /home/ubuntu/firstServerExpress
 
 #install node modules
 sudo npm install
