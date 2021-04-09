@@ -6,6 +6,7 @@ sudo chmod -R 777 /home/ubuntu/firstServerExpress
 # Remove previous folder and move new version
 sudo rm -rf /var/www/firstServerExpress
 sudo mv /home/ubuntu/firstServerExpress /var/www/firstServerExpress
+cd /var/www/firstServerExpress
 
 #install node modules
 sudo npm install
